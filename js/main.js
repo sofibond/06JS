@@ -5,33 +5,43 @@ let isNumber = function(n) {
 };
 
 function findNumber() {
-  function tabNumber() {
-    let a = prompt('Угадай число от 1 до 100');
-    if (a === null) {
-      alert('Игра завершена!');
-      return;
-    } else if (!isNumber(a)) {
-      alert('Введи число!');
-      tabNumber();
-    }
-    return a;
+  let a = prompt('Угадай число от 1 до 100');
+  let check = false;
+  if (a === null) {
+    alert('Игра завершена!');
+    check = true;
+    return;
+  } else if (!isNumber(a)) {
+    alert('Введи число!');
+    findNumber();
   }
   const b = 10;
-  return tabNumber() - b;
-}
+  let result = a - b;
 
-
-function isRight() {
-  let number = findNumber();
-  if (number === 0) {
-    console.log('Поздравляю, Вы угадали!!!');
-  } else if (number < 0) {
-    console.log('Загаданное число больше');
+  function checkNumber() {
+    if (result === 0) {
+      alert('Поздравляю, Вы угадали!!!');
+      let gameOver = confirm("Сыграем ещё?");
+      if (gameOver === true) {
+        findNumber();
+      }
+    } else if (result < 0) {
+      alert('Загаданное число больше');
+      findNumber();
+    } else {
+      alert('Загаданное число меньше');
+      findNumber();
+    }
+  }
+  if (check === false) {
+    checkNumber();
   } else {
-    console.log('Загаданное число меньше');
+    return;
   }
 }
-isRight();
+
+findNumber();
+
 
 
 
